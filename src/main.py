@@ -4,6 +4,7 @@ from preprocessor import preprocess_data
 from feature_engineering import  prepare_feature
 from scaler import scale_feature
 from clustering import create_clusters
+from analyzer import analyze_clusters
 
 def main():
     # Load the dataset
@@ -32,6 +33,12 @@ def main():
 
     feature_df['Cluster'] = cluster_labels
     print(feature_df.head())
+
+    # cluster summary
+    summary  =  analyze_clusters(feature_df)
+
+    print("\nCluster Summary:")
+    print(summary)
 
 
 if __name__ == "__main__":
