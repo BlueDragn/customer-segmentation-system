@@ -169,3 +169,52 @@ Next Step:
 - Generate cluster labels.
 - Analyze customer segments and cluster characteristics.
 
+
+### Session 4 – K-Means Clustering
+
+#### Objective:
+Implement K-Means clustering and assign customers to behavioral segments.
+
+#### Work Done:
+- Created clustering.py.
+- Imported KMeans from scikit-learn.
+- Configured model with:  
+    n_clusters=5  
+    random_state=42  
+    n_init=10  
+- Applied fit_predict() on scaled customer features.
+- Generated cluster labels for all customers.
+- Added Cluster column to the dataset.
+- Displayed sample cluster assignments.
+
+#### Observations:
+- K-Means successfully assigned every customer to a cluster.
+- Dataset shape used for clustering:  
+    (200, 4)
+- Cluster labels were generated without errors.
+- Customers with similar characteristics were grouped together.
+
+#### Changes Made:
+
+- Implemented create_clusters() function.
+- Added clustering stage to the pipeline.
+- Added Cluster column to feature dataset.
+
+#### Challenges:
+
+- None.
+- Previous feature engineering and scaling stages worked correctly, allowing clustering to run successfully.
+
+#### Key Learning:
+
+- K-Means is an unsupervised learning algorithm.
+- Cluster labels are created by the algorithm and are not provided by the dataset.
+- Clustering groups customers based on feature similarity.
+- Scaled features are essential because K-Means relies on distance calculations.
+
+#### Next Step:
+
+- Create analyzer.py.
+- Analyze cluster statistics.
+- Calculate average age, income, and spending score for each cluster.
+- Interpret customer segments.
