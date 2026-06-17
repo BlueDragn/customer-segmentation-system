@@ -6,7 +6,7 @@
 
 ### Session: 1 - Project Setup & Data Loading
 
-#### Objective:
+#### Objective
 
 Initialize project structure and verify dataset loading.
 
@@ -19,27 +19,28 @@ Initialize project structure and verify dataset loading.
 - Created main.py.
 - Loaded dataset successfully and displayed basic information.
 
-#### Observations:
+#### Observations
 
 - Dataset contains 200 customer records.
 - Columns include CustomerID, Gender, Age, Annual Income, and Spending Score.
 - Data loaded without issues.
 
-#### Challenges:
+#### Challenges
 
 - None.
 
-#### Next Step:
+#### Next Step
 
 Implement preprocessing layer and prepare features for clustering.
 
-
 ### Session 2: Preprocessing
 
-#### objective:
+#### objective
+
 Prepare the customer dataset for clustering by validating data quality and removing non-informative features.
 
-#### Work Done:
+#### Work Done
+
 - Created preprocessor.py.
 - Checked dataset shape.
 - Verified column structure.
@@ -50,34 +51,121 @@ Prepare the customer dataset for clustering by validating data quality and remov
 - Verified successful pipeline execution.
 - Displayed processed dataset preview.
 
-#### Observations:
+#### Observations
+
 - Dataset contains 200 customer records and 5 columns.
 - No missing values were found.
 - No duplicate rows were found.
 - CustomerID is an identifier and does not contain behavioral information useful for clustering.
 - After removing CustomerID, the dataset contains only customer attributes relevant to segmentation.
 
-#### Changes Made:
+#### Changes Made
+
 - Implemented preprocess_data() function.
 - Added missing value validation.
 - Added duplicate row validation.
 - Added CustomerID removal step.
 - Updated main.py to include preprocessing stage.
 
-#### Challenges:
+#### Challenges
+
 - Initially loaded the Sales Forecasting dataset by mistake.
 - Encountered a CustomerID column error because the wrong dataset schema was being used.
 - Verified dataset columns and corrected the dataset source.
 - Re-ran the pipeline successfully using the Mall Customers dataset.
 
-#### Key Learning:
+#### Key Learning
+
 - Data preprocessing is the bridge between raw data and machine learning.
 - Identifiers should generally be removed before training ML models.
 - Validating dataset schema is an important debugging step.
 - Many apparent code errors are actually data input issues.
 
-#### Next Step:
+#### Next Step
+
 - Create feature_engineering.py.
 - Encode Gender column into numerical values.
 - Apply feature scaling using StandardScaler.
 - Generate a clustering-ready feature matrix for K-Means.
+
+### Session 3 – Feature Engineering and Feature Scaling
+
+#### Objective
+
+Transform customer data into a numerical and standardized feature set suitable for K-Means clustering.
+
+#### Work Done
+
+- Created feature_engineering.py.
+- Encoded Gender values:  
+    Male → 0
+    Female → 1
+- Selected clustering features after preprocessing.
+- Created scaler.py.
+- Implemented feature scaling using StandardScaler.
+- Updated main.py to integrate feature engineering and scaling stages.
+- Generated scaled feature matrix.
+- Verified successful pipeline execution.
+
+#### Observations
+
+- After preprocessing, the dataset contained:  
+    Gender  
+    Age  
+    Annual Income (k$)  
+    Spending Score (1-100)  
+
+- CustomerID was successfully removed before feature engineering.
+- Feature matrix shape after scaling:
+    (200, 4)
+
+- All features were converted into a numerical format suitable for machine learning algorithms.
+
+#### Changes Made
+
+- Implemented prepare_features() function.
+- Added Gender encoding logic.
+- Implemented scale_feature() function using StandardScaler.
+- Connected preprocessing, feature engineering, and scaling stages in the pipeline.
+
+#### Challenges
+
+- Initially passed cleaned_df directly into StandardScaler.
+- Encountered error:
+
+    ValueError: could not convert string to     float: 'Male'
+
+- Investigated the issue and identified that the Gender column was still categorical.
+- Corrected the pipeline flow by passing feature_df (encoded data) into the scaler instead of cleaned_df.
+- Re-ran the pipeline successfully.
+
+#### Key Learning
+
+- StandardScaler can only process numerical values.
+- Categorical features must be encoded before scaling.
+- The order of stages in an ML pipeline is important:
+
+```
+
+    Raw Data
+        ↓
+    Preprocessing
+        ↓
+    Feature Engineering
+        ↓
+    Scaling
+        ↓
+    Machine Learning Model
+
+```
+
+- Distance-based algorithms such as K-Means depend heavily on properly scaled features.
+
+Next Step:
+
+- Create clustering.py.
+- Implement K-Means clustering.
+- Determine optimal number of clusters.
+- Generate cluster labels.
+- Analyze customer segments and cluster characteristics.
+
